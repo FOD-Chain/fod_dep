@@ -1,0 +1,52 @@
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+  <div class="col-md-12 portlet light">
+      <div class="portlet-body">
+
+        <table class="col-md-6 table table-hover">
+          <tr ><td width="25%">{{settings.i18n.get("height")}} </td><td><a class="btn btn-info" ng-show="block.number > 0 && blockNum == block.number" href="/block/{{block.number - 1}}">&lt;{{settings.i18n.get("prev")}}</a> {{block.number | number}} <a class="btn btn-info" ng-show="blockNum == block.number" href="/block/{{block.number + 1}}"> {{settings.i18n.get("next")}}&gt;</a></td></tr>
+          <tr ><td width="25%">{{settings.i18n.get("time")}}</td>
+                <td>{{block.datetime | date:'yyyy-MM-dd HH:mm:ss Z' }} ({{block.timestamp | timeDuration}} {{settings.i18n.get("ago")}})</td>
+          </tr>
+          <tr ><td width="25%">{{settings.i18n.get("Hash")}}</td><td>{{block.hash}}</td></tr>
+          <tr ><td width="25%">{{settings.i18n.get("parentHash")}}</td><td><a href="/block/{{block.number - 1}}">{{block.parentHash}}</td></tr>
+          <tr ><td width="25%">{{settings.i18n.get("sha3_Uncles")}}</td><td>{{block.sha3Uncles}}</td></tr>
+          <tr ><td width="25%">{{settings.i18n.get("Mined_By")}}</td><td><a href="/addr/{{block.miner}}">{{block.miner}}</td></tr>
+          <tr ><td width="25%">{{settings.i18n.get("Difficulty")}}</td><td>{{block.difficulty | totalDifficulty}}</td></tr>
+          <tr ><td width="25%">{{settings.i18n.get("Total_Difficulty")}}</td><td>{{block.totalDifficulty | teraHashes | number}} TH</td></tr>
+          <tr ><td width="25%">{{settings.i18n.get("Gas_Limit")}}</td><td>{{block.gasLimit | number}}</td></tr>
+          <tr ><td width="25%">{{settings.i18n.get("Gas_Used")}}</td><td>{{block.gasUsed | number}}</td></tr>
+          <tr ><td width="25%">{{settings.i18n.get("nonce")}}</td><td>{{block.nonce}}</td></tr>
+          <tr ><td width="25%">{{settings.i18n.get("Extra_Data")}}</td><td>{{block.extraData}}</td></tr>
+          <tr ng-show="block.uncles.length > 0"><td width="25%">{{settings.i18n.get("Uncles")}}</td><td>{{block.uncles.length}} {{settings.i18n.get("uncles")}}
+            <table class="table table-condensed" ng-show="block.uncles.length > 0">
+              <tbody>
+                <tr ng-repeat="u in block.uncles">
+                  <td> <a href="/uncle/{{block.number}}/{{$index}}">{{u}}</a> </td>
+                </tr>
+              </tbody>
+            </table>
+          </td></tr>
+        </table>
+    </div>
+    <!--TODO: calculate block reward -->
+
+  </div>
+    <!-- Begin: Transaction Datatable -->
+  <div class="portlet light portlet-datatable col-md-12">
+     <div class="portlet-body">
+    <table class="table table-condensed">
+        <thead ng-show="block.transactions.length > 0">
+            <tr>
+                <th> {{settings.i18n.get("transactions")}} </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="t in block.transactions">
+                <td> <a href="/tx/{{t}}">{{t}}</a> </td>
+            </tr>
+        </tbody>
+    </table>
+      </div>
+    </div><!-- End: portlet -->
+</div>

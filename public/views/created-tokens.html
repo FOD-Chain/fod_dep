@@ -1,0 +1,33 @@
+
+<div class="table-scrollable">
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th> {{settings.i18n.get("tx_hash")}} </th>
+                <th> {{settings.i18n.get("age")}} </th>
+                <th> {{settings.i18n.get("block")}} </th>
+                <th> {{settings.i18n.get("to")}} </th>
+                <th style="text-align:right"> {{settings.i18n.get("Contract Name")}}Amount </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="t in created_tokens track by $index">
+                <td class="truncate-txhash"> <a href="/tx/{{t.transactionHash}}">{{t.transactionHash}}</a> </td>
+                <td>{{t.timestamp | timeDuration}} {{settings.i18n.get("ago")}}</td>
+                <td> <a href="/block/{{t.blockNumber}}">{{t.blockNumber}}</a> </td>
+                <td class="truncate-addrhash"> <a href="/addr/{{t.to}}">{{t.to}}</a> </td>
+                <td style="text-align:right"> {{t.amount | number}} </td>
+                <td style="text-align:center"><span class="label label-sm label-success"> {{settings.i18n.get("Contract Name")}}Created </span></td>
+            </tr>
+        </tbody>
+    </table>
+    <ul class="pager">
+        <li class="previous">
+            <a ng-click="getCreatedTokens(created_tokens[0]._id)"> ← {{settings.i18n.get("Contract Name")}}Newer </a>
+        </li>
+        <li class="next">
+            <a ng-click="getCreatedTokens(created_tokens[created_tokens.length-1]._id)"> {{settings.i18n.get("Contract Name")}}Older → </a>
+        </li>
+    </ul>
+</div>
